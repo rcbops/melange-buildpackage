@@ -1,0 +1,95 @@
+[DEFAULT]
+# Show more verbose log output (sets INFO log level output)
+verbose = False
+
+# Show debugging output in logs (sets DEBUG log level output)
+debug = False
+
+# Address to bind the API server
+bind_host = 0.0.0.0
+
+# Port the bind the API server to
+bind_port = 9898
+
+# SQLAlchemy connection string for the reference implementation
+# registry server. Any valid SQLAlchemy connection string is fine.
+# See: http://www.sqlalchemy.org/docs/05/reference/sqlalchemy/connections.html#sqlalchemy.create_engine
+sql_connection = sqlite:///melange_test.sqlite
+# sql_connection = mysql://root:root@localhost/melange
+#sql_connection = postgresql://melange:melange@localhost/melange
+
+# Period in seconds after which SQLAlchemy should reestablish its connection
+# to the database.
+#
+# MySQL uses a default `wait_timeout` of 8 hours, after which it will drop
+# idle connections. This can result in 'MySQL Gone Away' exceptions. If you
+# notice this, you can lower this value to ensure that SQLAlchemy reconnects
+# before MySQL can drop the connection.
+sql_idle_timeout = 3600
+
+#DB Api Implementation
+db_api_implementation = "melange.db.sqlalchemy.api"
+
+# Path to the extensions
+api_extensions_path = melange/extensions
+
+# Cidr for auto creating first ip block in a network
+# If unspecified, auto creating is turned off
+# default_cidr = 10.0.0.0/24
+
+#IPV6 Generator Factory, defaults to rfc2462
+#ipv6_generator=melange.ipv6.tenant_based_generator.TenantBasedIpV6Generator
+
+#DNS info for a data_center
+dns1 = 8.8.8.8
+dns2 = 8.8.4.4
+
+#Number of days before deallocated IPs are deleted
+keep_deallocated_ips_for_days = 2
+
+#Number of retries for allocating an IP
+ip_allocation_retries = 5
+
+# ============ ipv4 queue kombu connection options ========================
+
+ipv4_queue_hostname = localhost
+ipv4_queue_userid = guest
+ipv4_queue_password = guest
+ipv4_queue_ssl = False
+ipv4_queue_port = 5672
+ipv4_queue_virtual_host = /
+ipv4_queue_transport = memory
+
+[composite:melange]
+use = call:melange.common.wsgi:versioned_urlmap
+/: versions
+/v0.1: melangeapi
+
+[app:versions]
+paste.app_factory = melange.versions:app_factory
+
+[pipeline:melangeapi]
+pipeline = extensions melangeapp
+
+[filter:extensions]
+paste.filter_factory = melange.common.extensions:factory
+
+[filter:tokenauth]
+paste.filter_factory = keystone.middleware.auth_token:filter_factory
+service_protocol = http
+service_host = 127.0.0.1
+service_port = 808
+auth_host = 127.0.0.1
+auth_port = 5001
+auth_protocol = http
+admin_token = 999888777666
+
+[filter:authorization]
+paste.filter_factory = melange.common.auth:AuthorizationMiddleware.factory
+
+[app:melangeapp]
+paste.app_factory = melange.ipam.service:app_factory
+
+#Add this filter to log request and response for debugging
+[filter:debug]
+paste.filter_factory = melange.common.wsgi:Debug.factory

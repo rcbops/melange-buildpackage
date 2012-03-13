@@ -1,0 +1,11 @@
+# Running Melange App
+>cd <melange_root>
+>sudo pip install -r tools/pip-requires
+>cp etc/melange/melange.conf.sample  ~/melange.conf
+>bin/melange-manage db_sync
+>bin/melange
+By default melange uses sqlite, to use Mysql
+1) Create the mysql db manually
+   Eg: mysql -uroot -p -e "CREATE DATABASE melange_test;CREATE DATABASE melange"
+2) Change sql_connection key in melange.conf to point to that db.
+   Eg: sql_connection = mysql://<user>:<password>@localhost/melange
