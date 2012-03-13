@@ -1,0 +1,9 @@
+description "Melange IPAM server"
+author "Chuck Short <zulcss@ubuntu.com>"
+
+start on (local-filesystem and net-device-up IFACE!=lo)
+stop on runlevel [016]
+
+respawn
+
+exec su -c "melange" melange

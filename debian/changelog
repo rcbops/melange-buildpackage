@@ -1,0 +1,41 @@
+melange (2012.0+e3-rcb1) precise; urgency=low
+
+  * Steal ubuntu packaging, and rebuilt from
+    https://github.com/openstack/melange, revision
+    0032811305576a32f307351617a1926bca231439
+
+ -- RCB Builder <rcb-deploy@lists.rackspace.com>  Tue, 13 Mar 2012 14:34:04 -0700
+
+melange (2012.1~e4~20120126.11502-0ubuntu1) precise; urgency=low
+
+  * New upstream release.
+  * Add debian/watch file.
+  * Update debian/rules to grab source like other openstack
+    projects.
+
+ -- Chuck Short <zulcss@ubuntu.com>  Fri, 27 Jan 2012 10:05:08 -0500
+
+melange (2012.1~e3+git20120112-0ubuntu1) precise; urgency=low
+
+  * New upstream release.
+  * Dropped python-melange.postinst.
+  * Install confiruation files properly.
+  * debian/patches/fix-sql-conn.patch: Updated for newer version.
+  * debian/rules: Put the tarball in the right place.
+
+ -- Chuck Short <zulcss@ubuntu.com>  Thu, 12 Jan 2012 04:40:36 -0500
+
+melange (2011.2+git20111219-0ubuntu1) precise; urgency=low
+
+  * New upstream release:
+    - Add build dependency on python-openstack-common.
+    - Dropped debian/patches/fixup-setup.patch.
+    - Run testsuite during build.
+
+ -- Chuck Short <zulcss@ubuntu.com>  Mon, 19 Dec 2011 12:16:09 -0500
+
+melange (2011.2+git20111205-0ubuntu1) precise; urgency=low
+
+  * Initial release.
+
+ -- Chuck Short <zulcss@ubuntu.com>  Mon, 05 Dec 2011 12:26:40 -0500

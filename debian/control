@@ -1,0 +1,58 @@
+Source: melange
+Section: net
+Priority: extra
+Maintainer: RCB Builder <rcb-deploy@lists.rackspace.com>
+XCBS-Original-Maintainer: Chuck Short <zulcss@ubuntu.com>
+Build-Depends: debhelper (>= 8.0.0), python-all (>= 2.6.6-2~)
+Build-Depends-Indep:
+ python-openstack-common,
+ python-setuptools,
+ python-sqlalchemy,
+ python-eventlet,
+ python-kombu,
+ python-routes,
+ python-webob,
+ python-mox,
+ python-nose,
+ python-pastedeploy,
+ python-netaddr,
+ python-sphinx,
+ python-coverage,
+ python-webtest,
+ python-httplib2,
+ pep8
+Standards-Version: 3.9.2
+Homepage: https://launchpad.net/melange
+XCBS-RCB-Component: essex-e3
+
+Package: melange
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, python, adduser
+Description: IPAM management service for Openstack - Daemons
+ Melange is a network information service that provides a centralized
+ mechanism for managing IPs, MAC addresses and other information that
+ needs to be shared across multiple openstack services
+ (Nova zones, Atlas, Quantum).
+ .
+ This package contains the daemons.
+
+Package: python-melange
+Architecture: all
+Section: python
+Depends: ${python:Depends}, ${misc:Depends},
+ python-sqlalchemy,
+ python-eventlet,
+ python-kombu,
+ python-routes,
+ python-webob,
+ python-mox,
+ python-pastedeploy,
+ python-paste,
+ python-httplib2
+Description: IPAM management service for Openstack - Python library
+ Melange is a network information service that provides a centralized
+ mechanism for managing IPs, MAC addresses and other information that
+ needs to be shared across multiple openstack services
+ (Nova zones, Atlas, Quantum).
+ .
+ This package contains the python libraries.

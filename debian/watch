@@ -1,0 +1,3 @@
+version=3
+http://launchpad.net/melange/+download http://launchpad.net/melange/.*/.*/melange-(.*)\.tar\.gz
+http://melange.openstack.org/tarballs/ melange-(.*).tar.gz

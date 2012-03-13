@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]
+then
+	if ! getenv group melnage > /dev/null 2>&1
+	then
+		addgroup --system melnage >/dev/null
+	fi
+
+	if ! getent passwd melange > /dev/null 2>&1
+	then
+		adduser --system --home /var/lib/melnage --ingroup melnage \
+			 --no-create-home --shell /bin/bash melange
+	fi
+
+	chown melange:melange -R /var/lib/melnage /var/log/melange /etc/melange
+	chmod 0700 /etc/melange
+fi
+
+#DEBHELPER#

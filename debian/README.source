@@ -1,0 +1,9 @@
+melange for Debian
+------------------
+
+To generate a tarball for melange:
+
+fakeroot debian/rules get-orig-source
+
+
+
