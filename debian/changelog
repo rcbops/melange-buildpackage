@@ -1,3 +1,9 @@
+melange (2012.0+e3-rcb2) precise; urgency=low
+
+  * update for newer openstack-common
+
+ -- RCB Builder <rcb-deploy@lists.rackspace.com>  Tue, 13 Mar 2012 17:32:36 -0700
+
 melange (2012.0+e3-rcb1) precise; urgency=low
 
   * Steal ubuntu packaging, and rebuilt from
